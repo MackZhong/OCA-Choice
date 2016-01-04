@@ -9,7 +9,9 @@ fi
 
 if [ -n "${1}" ]; then
     git remote add -f ${1} git@github.com:OCA/${1}.git
-    git subtree add --prefix=${1} ${1} $VERION --squash
+    git subtree add pull --prefix=${1} ${1} $VERION --squash
+    rm -rf ~/.local/share/Odoo/addons/$VERSION/${1}
+    ln ~/.local/share/Odoo/addons/$VERSION/${1} ${1}
 else
-    echo "repo name needed"
+    echo "${0} repo-name version"
 fi
