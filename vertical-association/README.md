@@ -13,6 +13,10 @@ addon | version | summary
 --- | --- | ---
 [membership_initial_fee](membership_initial_fee/) | 8.0.1.0.0 | Initial fee for memberships
 [membership_prorrate](membership_prorrate/) | 8.0.1.0.0 | Prorrate membership fee
+<<<<<<< HEAD
+=======
+[membership_prorrate_variable_period](membership_prorrate_variable_period/) | 1.0 | Prorrate membership fee for variable periods
+>>>>>>> 8d4a692fde0181814109543fa523e149c49de7c6
 [membership_variable_period](membership_variable_period/) | 8.0.1.0.0 | Variable period for memberships
 
 [//]: # (end addons)
