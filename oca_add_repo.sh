@@ -3,15 +3,27 @@
 #set -o errexit
 
 VERSION="8.0"
-if [ -n "${2}" ]; then
-    VERSION="${2}"
+DIR=$(cd `dirname $0`; pwd)
+BASE=`basename $0`
+
+if [ -n "$2" ]; then
+    VERSION="$2"
 fi
 
-if [ -n "${1}" ]; then
-    git remote add -f ${1} git@github.com:OCA/${1}.git
-    git subtree add --prefix=${1} ${1} $VERSION --squash
-    rm -rf ~/.local/share/Odoo/addons/$VERSION/${1}
-    find ${1} -maxdepth 1 -mindepth 1 -type d | xargs ln -st ~/.local/share/Odoo/addons/$VERSION/
+if [ -n "$1" ]; then
+    echo Add remote repo...
+    git remote add -f $1 git@github.com:OCA/$1.git
+#    if [ $? -eq 0 ]; then
+        echo Add subtree...
+        git subtree add --prefix=$1 $1 $VERSION --squash
+#        if [ $? -eq 0 ]; then
+            echo Create symbol links...
+            find $DIR/$1 -maxdepth 1 -mindepth 1 -type d | xargs ln -sft ~/.local/share/Odoo/addons/$VERSION/
+            if [ $? -eq 0 ]; then
+                echo End.
+            fi
+#        fi
+#    fi
 else
-    echo "${0} repo-name version"
+    echo "$BASE repo-name version"
 fi
